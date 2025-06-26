@@ -191,7 +191,7 @@ body {
 }
 
 /* WhatsApp Float */
-.whatsapp-float {
+/* .whatsapp-float {
     transition: all 0.3s ease;
     box-shadow: 0 5px 20px rgba;
         width: 50px;
@@ -200,7 +200,60 @@ body {
         bottom: 20px;
         right: 20px;
     
+} */
+ .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite;
+    transition: transform 0.3s ease;
 }
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* Notificação estilo WhatsApp */
+.whatsapp-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: #ff3b30;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 2px white;
+}
+
 
 .location-section {
     padding: 60px 0;
