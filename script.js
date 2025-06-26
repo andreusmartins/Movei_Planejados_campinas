@@ -173,3 +173,51 @@ document.addEventListener('DOMContentLoaded', function() {
     setupWhatsAppForm();
     handleResponsive();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('sellerVideoMP4');
+    const thumbnail = document.querySelector('.video-thumbnail-overlay');
+    const playBtn = document.querySelector('.play-button');
+    const watchAgainBtn = document.querySelector('.watch-again');
+    
+    if (video && thumbnail) {
+        // Click na thumbnail
+        thumbnail.addEventListener('click', function() {
+            video.play();
+            video.setAttribute('controls', 'true');
+            thumbnail.style.opacity = '0';
+            thumbnail.style.pointerEvents = 'none';
+            watchAgainBtn.style.display = 'flex';
+        });
+        
+        // Botão de play customizado
+        playBtn.addEventListener('click', function() {
+            video.play();
+            video.setAttribute('controls', 'true');
+            thumbnail.style.opacity = '0';
+            thumbnail.style.pointerEvents = 'none';
+            watchAgainBtn.style.display = 'flex';
+        });
+        
+        // Assistir novamente
+        watchAgainBtn.addEventListener('click', function() {
+            video.currentTime = 0;
+            video.play();
+        });
+        
+        // Resetar quando o vídeo terminar
+        video.addEventListener('ended', function() {
+            watchAgainBtn.style.display = 'flex';
+        });
+        
+        // Lazy loading
+        const videoObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                video.load();
+                videoObserver.unobserve(video);
+            }
+        }, { threshold: 0.1 });
+        
+        videoObserver.observe(video);
+    }
+});
