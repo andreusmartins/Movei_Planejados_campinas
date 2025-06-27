@@ -595,7 +595,6 @@ body {
 .social-hero a {
     color: white;
     font-size: 40px; /* Ícone maior */
-    background-color: rgba(0, 0, 0, 0.4);
     padding: 12px;
     border-radius: 20%;
     transition: transform 0.3s ease, background-color 0.3s ease;
