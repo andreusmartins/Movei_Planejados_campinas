@@ -79,30 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // ==================== ANIMAÇÕES ====================
-    const initAnimations = () => {
-        // Efeito de digitação no slogan
-        const typeWriter = (element, text, i = 0) => {
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                setTimeout(() => typeWriter(element, text, i + 1), 100);
-            }
-        };
-
-        const sloganElement = document.querySelector('.slogan');
-        if (sloganElement) {
-            const originalText = sloganElement.textContent;
-            sloganElement.textContent = '';
-            typeWriter(sloganElement, originalText);
-        }
-
-        // Animar itens de benefício
-        document.querySelectorAll('.benefit-item').forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.2}s`;
-            item.classList.add('animate__animated', 'animate__fadeInUp');
-        });
-    };
-
     // ==================== FORMULÁRIO WHATSAPP ====================
     const setupWhatsAppForm = () => {
         const form = document.getElementById('orcamentoForm');

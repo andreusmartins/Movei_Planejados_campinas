@@ -584,3 +584,24 @@ body {
 .cta-location .btn:hover {
     background-color: #1ebe5d;
 }
+
+.social-hero {
+    margin-top: 30px;
+    gap: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.social-hero a {
+    color: white;
+    font-size: 40px; /* Ícone maior */
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 12px;
+    border-radius: 20%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-hero a:hover {
+    transform: scale(1.2);
+    color: #c98956; /* Ou alguma cor do tema */
+}
