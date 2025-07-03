@@ -197,3 +197,109 @@ document.addEventListener('DOMContentLoaded', function() {
         videoObserver.observe(video);
     }
 });
+
+// Cookie Consent Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const cookieConsent = document.getElementById('cookieConsent');
+    const btnCustomize = document.getElementById('btnCustomize');
+    const btnReject = document.getElementById('btnReject');
+    const btnAccept = document.getElementById('btnAccept');
+    const cookieCustomization = document.getElementById('cookieCustomization');
+    const btnSavePreferences = document.getElementById('btnSavePreferences');
+    
+    // Check if cookie consent was already given
+    if (!getCookie('cookieConsent')) {
+        setTimeout(() => {
+            cookieConsent.classList.add('active');
+        }, 1000);
+    }
+    
+    // Customize button click
+    btnCustomize.addEventListener('click', function() {
+        cookieCustomization.classList.add('active');
+    });
+    
+    // Reject button click
+    btnReject.addEventListener('click', function() {
+        setCookie('cookieConsent', 'rejected', 365);
+        cookieConsent.classList.remove('active');
+        // Here you would implement the actual cookie rejection
+    });
+    
+    // Accept all button click
+    btnAccept.addEventListener('click', function() {
+        setCookie('cookieConsent', 'accepted_all', 365);
+        cookieConsent.classList.remove('active');
+        // Here you would implement the actual cookie acceptance
+        loadAllCookies();
+    });
+    
+    // Save preferences button click
+    btnSavePreferences.addEventListener('click', function() {
+        const analytics = document.getElementById('analyticsCookies').checked;
+        const marketing = document.getElementById('marketingCookies').checked;
+        
+        setCookie('cookieConsent', 'custom', 365);
+        setCookie('cookiePreferences', JSON.stringify({
+            analytics: analytics,
+            marketing: marketing
+        }), 365);
+        
+        cookieConsent.classList.remove('active');
+        cookieCustomization.classList.remove('active');
+        
+        // Here you would implement the actual cookie loading based on preferences
+        if (analytics) loadAnalyticsCookies();
+        if (marketing) loadMarketingCookies();
+    });
+    
+    // Helper functions
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+    
+    function getCookie(name) {
+        const cookieName = name + "=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+        for(let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(cookieName) === 0) {
+                return cookie.substring(cookieName.length, cookie.length);
+            }
+        }
+        return "";
+    }
+    
+    // These functions would be implemented based on your actual cookies
+    function loadAllCookies() {
+        // Load all cookies
+        console.log("Loading all cookies");
+    }
+    
+    function loadAnalyticsCookies() {
+        // Load analytics cookies
+        console.log("Loading analytics cookies");
+    }
+    
+    function loadMarketingCookies() {
+        // Load marketing cookies
+        console.log("Loading marketing cookies");
+    }
+});
+// Modifique seu código do Google Analytics para:
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+
+// Verifique o consentimento antes de carregar
+if (getCookie('cookieConsent') === 'accepted_all' || 
+   (getCookie('cookieConsent') === 'custom' && JSON.parse(getCookie('cookiePreferences')).analytics)) {
+    gtag('js', new Date());
+    gtag('config', 'AW-17298621223');
+}
