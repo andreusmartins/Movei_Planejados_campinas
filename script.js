@@ -303,3 +303,12 @@ if (getCookie('cookieConsent') === 'accepted_all' ||
     gtag('js', new Date());
     gtag('config', 'AW-17298621223');
 }
+
+if (window.location.pathname === '/orcamento') {
+  document.addEventListener('DOMContentLoaded', function() {
+    const formSection = document.getElementById('contato');
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+}
